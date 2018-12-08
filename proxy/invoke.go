@@ -67,7 +67,7 @@ func InvokeFunction(gateway string, name string, bytesIn *[]byte, contentType st
 	res, err := client.Do(req)
 
 	if err != nil {
-		fmt.Println()
+		fmt.Println("Custom code works")
 		fmt.Println(err)
 		return nil, fmt.Errorf("cannot connect to OpenFaaS on URL: %s", gateway)
 	}
@@ -90,6 +90,7 @@ func InvokeFunction(gateway string, name string, bytesIn *[]byte, contentType st
 	default:
 		bytesOut, err := ioutil.ReadAll(res.Body)
 		if err == nil {
+			fmt.Println("Custom code works without redist")
 			return nil, fmt.Errorf("server returned unexpected status code: %d - %s", res.StatusCode, string(bytesOut))
 		}
 	}
